@@ -1,0 +1,64 @@
+{
+    "name": "@tsxo/envy",
+    "version": "0.2.1",
+    "author": "TSxo",
+    "license": "MIT",
+    "description": "A lightweight, zero dependancy, and typesafe way to retrieve environment variables.",
+    "keywords": [
+        "envy",
+        "env",
+        "environment",
+        "manager",
+        "safe",
+        "typesafe",
+        "convert",
+        "conversion",
+        "assert",
+        "typescript",
+        "zero-dependency"
+    ],
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TSxo/envy.git"
+    },
+    "bugs": {
+        "url": "https://github.com/TSxo/envy/issues"
+    },
+    "homepage": "https://github.com/TSxo/envy",
+    "engines": {
+        "node": ">=18"
+    },
+    "sideEffects": false,
+    "scripts": {
+        "clean": "rm -rf dist",
+        "build": "npm run clean && tsc",
+        "build:check": "tsc --noEmit",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+        "test": "vitest run --reporter=verbose",
+        "coverage": "vitest run --coverage",
+        "dev": "vitest",
+        "ci": "npm run build && npm run format:check && npm run exports && npm test",
+        "local-release": "changeset version && changeset publish",
+        "prepublishOnly": "npm run ci"
+    },
+    "devDependencies": {
+        "@arethetypeswrong/cli": "^0.16.4",
+        "@changesets/cli": "^2.27.9",
+        "@types/node": "^22.7.7",
+        "@vitest/coverage-v8": "^2.1.3",
+        "prettier": "^3.3.3",
+        "typescript": "^5.6.3",
+        "vitest": "^2.1.3"
+    }
+}

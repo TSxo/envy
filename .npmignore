@@ -1,0 +1,23 @@
+# GitHub specific
+.github/**
+.gitignore
+.changeset
+
+# Build artifacts
+coverage
+node_modules
+tsconfig.tsbuildinfo
+
+# Config files
+.prettier*
+package-lock.json
+tsconfig.*.json
+vitest.config.ts
+
+# System files
+.DS_Store
+**/.DS_Store
+
+# Test files
+**/*.test.*
+**/*.spec.*
