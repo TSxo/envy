@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.3.0
+
+### Minor Changes
+
+-   bd13455: Add support for CJS
+
 ## 0.2.2
 
 ### Patch Changes
