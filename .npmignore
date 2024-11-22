@@ -7,10 +7,12 @@
 coverage
 node_modules
 tsconfig.tsbuildinfo
+scripts
 
 # Config files
 .prettier*
 package-lock.json
+tsconfig.json
 tsconfig.*.json
 vitest.config.ts
 

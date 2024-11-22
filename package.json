@@ -17,15 +17,9 @@
         "typescript",
         "zero-dependency"
     ],
-    "type": "module",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.js"
-        }
-    },
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts",
     "repository": {
         "type": "git",
         "url": "https://github.com/TSxo/envy.git"
@@ -40,11 +34,14 @@
     "sideEffects": false,
     "scripts": {
         "clean": "rm -rf dist",
-        "build": "npm run clean && tsc",
-        "build:check": "tsc --noEmit",
+        "build": "npm run clean && npm run build:all && npm run format",
+        "build:all": "npm run build:types && npm run build:esm && npm run build:cjs && node scripts/generate-package-files.mjs",
+        "build:types": "tsc -p tsconfig.types.json",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+        "exports": "attw --pack .",
         "test": "vitest run --reporter=verbose",
         "coverage": "vitest run --coverage",
         "dev": "vitest",

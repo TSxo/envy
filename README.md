@@ -3,18 +3,24 @@
 A powerful, simple, and type-safe environment variable management library for
 Javascript and TypeScript applications.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue)](https://www.typescriptlang.org/)
+![npm](https://img.shields.io/npm/v/@tsxo/envy)
+![Tree Shakeable](https://img.shields.io/badge/Tree%20Shakeable-✔-brightgreen)
+![Dotenv Compatible](https://img.shields.io/badge/Dotenv-Compatible-green)
 
 ## Features
 
--   **Type Safety** - Full TypeScript support with comprehensive type definitions
--   **Value Transformation** - Transform and normalize values with ease
--   **Validation** - Rich set of built-in assertions for common use cases
--   **Type Conversion** - Convert strings to numbers, booleans, arrays, and more
--   **Method Chaining** - Fluent API for building configurations
--   **Error Handling** - Detailed error messages for missing or invalid values
--   **Dotenv Compatible** - Fully compatible with [Dotenv](https://github.com/motdotla/dotenv)
+-   **Type Safety** - Full TypeScript support with comprehensive type definitions.
+-   **Value Transformation** - Transform and normalize values with ease.
+-   **Validation** - Rich set of built-in assertions for common use cases.
+-   **Type Conversion** - Convert strings to numbers, booleans, arrays, and more.
+-   **Method Chaining** - Fluent API for building configurations.
+-   **Error Handling** - Detailed error messages for missing or invalid values.
+-   **Dotenv Compatible** - Fully compatible with [Dotenv](https://github.com/motdotla/dotenv).
+-   **ESM and CJS** - Seamlessly supports both ECMAScript Modules (ESM) and CommonJS (CJS) for flexibility across modern and legacy projects.
+-   **Tree-Shaking Ready** - Designed with tree-shaking in mind to optimize application size.
+-   **Enhanced Dev Experience** - Ships with TypeScript source for easier debugging during development.
 
 ## Installation
 
