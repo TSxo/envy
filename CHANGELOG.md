@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.4.0
+
+### Minor Changes
+
+-   3c29032: Add in type narrowing via envy.narrow()
+
 ## 0.3.0
 
 ### Minor Changes
