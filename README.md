@@ -15,6 +15,7 @@ Javascript and TypeScript applications.
 -   **Value Transformation** - Transform and normalize values with ease.
 -   **Validation** - Rich set of built-in assertions for common use cases.
 -   **Type Conversion** - Convert strings to numbers, booleans, arrays, and more.
+-   **Type Narrowing** - Narrow types for more precise type safety.
 -   **Method Chaining** - Fluent API for building configurations.
 -   **Error Handling** - Detailed error messages for missing or invalid values.
 -   **Dotenv Compatible** - Fully compatible with [Dotenv](https://github.com/motdotla/dotenv).
@@ -41,10 +42,11 @@ If you wish to use Dotenv, please import and configure it before using Envy.
 import { envy, strConv, assert } from "@tsxo/envy";
 
 // Required values.
+// Required will trim the string and assert a minimum length of one.
 const apiKey = envy.required("API_KEY").assert(assert.minLen(32)).build();
 
 // Optional values with defaults.
-// Note: Does not fallback to the optional value if validations fail.
+// Required will trim the string and assert a minimum length of one.
 const region = envy
     .optional("AWS_REGION", "us-east-1")
     .assert(assert.prefix("us-"))
@@ -71,6 +73,18 @@ const manual = envy
     .assert(s => s.length() > 0, "Must have a length greater than zero")
     .convert(strConv.toNumber()) // You can use whichever method of conversion here.
     .build();
+
+// Type narrowing.
+type Region = "us-east-1" | "us-west-2";
+
+function isRegion(val: string): val is Region {
+    return val === "us-east-1" || val === "us-west-2";
+}
+
+const region = envy
+    .required("AWS_REGION")
+    .narrow(isRegion, "Invalid AWS region")
+    .build(); // region is now typed as Region rather than string.
 ```
 
 ## Core Concepts
@@ -99,6 +113,11 @@ type AssertFn<T> = {
     (v: T): boolean;
     context?: FnCtx;
 };
+
+/**
+ * Function type for narrowing a value from type T to a more specific type N.
+ */
+type NarrowFn<T, N extends T> = (v: T) => v is N;
 
 /**
  * Transform function for modifying values while maintaining their type.

@@ -1,5 +1,11 @@
-import type { AssertFn, TransformFn, ConvertFn, ErrCtx } from "./types.js";
-import { AssertError, MissingError, ConversionError } from "./errors.js";
+import type {
+    AssertFn,
+    TransformFn,
+    ConvertFn,
+    ErrCtx,
+    NarrowFn,
+} from "./types.js";
+import { AssertError, MissingError } from "./errors.js";
 import { toArray, toBool, toNumber } from "./str-conv.js";
 import { minLen } from "./assert/array-like.js";
 
@@ -78,6 +84,42 @@ class Envy<T> {
     public transform(fn: TransformFn<T>): this {
         this._value = fn(this._value);
         return this;
+    }
+
+    /**
+     * Narrows the type of the current value using a type guard function.
+     *
+     * @template N The narrowed type.
+     *
+     * @param {NarrowFn} fn - Type guard function.
+     * @param {string} [msg] - Optional error message if narrowing fails.
+     *
+     * @returns {Envy<N>} A new Envy instance with the narrowed type
+     *
+     * @throws {AssertError} If the type narrowing fails
+     *
+     * @example
+     * ```typescript
+     * type Region = "us-east-1" | "us-west-2";
+     *
+     * function isRegion(val: string): val is Region {
+     *   return val === "us-east-1" || val === "us-west-2";
+     * }
+     *
+     * const region = envy.required("AWS_REGION")
+     *   .narrow(isRegion, "Invalid AWS region")
+     *   .build(); // region is now typed as Region instead of string
+     * ```
+     */
+    public narrow<N extends T>(fn: NarrowFn<T, N>, msg?: string): Envy<N> {
+        if (!fn(this._value)) {
+            const ctx: ErrCtx = { description: "Failed type-narrowing" };
+            if (msg) ctx.userMessage = msg;
+
+            throw new AssertError(this._key, this._value, ctx);
+        }
+
+        return new Envy<N>(this._key, this._value);
     }
 
     /**

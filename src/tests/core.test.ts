@@ -31,6 +31,14 @@ suite("Core", function () {
             ).toThrow(AssertError);
         });
 
+        test("Should type narrow", () => {
+            const guard = (s: string): s is "5" => s === "5";
+            process.env.NUM = "5";
+            const out = required("NUM").narrow(guard, "Is not five").build();
+
+            expect(out).toBe("5");
+        });
+
         test("Should convert and validate", () => {
             process.env.PORT = "3000";
             const port = required("PORT")
@@ -63,17 +71,6 @@ suite("Core", function () {
     });
 
     suite("Convenience Functions", () => {
-        // test("envyRequired should require non-empty value", () => {
-        //     process.env.REQUIRED = "value";
-        //     const value = required("REQUIRED").build();
-        //     expect(value).toBe("value");
-        //
-        //     process.env.REQUIRED = "";
-        //     expect(() => envyRequired("REQUIRED").build()).toThrow(
-        //         EnvyMissingError,
-        //     );
-        // });
-
         test("Required should handle strings", () => {
             process.env.REQUIRED = "required";
             const value = required("REQUIRED").build();

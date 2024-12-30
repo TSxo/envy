@@ -44,6 +44,25 @@ export type AssertFn<T> = {
 };
 
 /**
+ * Function type for narrowing a value from type T to a more specific type N.
+ *
+ * @template T The original type of the value.
+ * @template N The narrowed type that extends T.
+ *
+ * @param   {T} v - The value to narrow.
+ *
+ * @returns {v is N} Type predicate indicating if the value is of the narrowed type N.
+ *
+ * @example
+ * ```typescript
+ * type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+ * const isLogLevel: NarrowFn<string, LogLevel> =
+ *   (v): v is LogLevel => ['debug', 'info', 'warn', 'error'].includes(v);
+ * ```
+ */
+export type NarrowFn<T, N extends T> = (v: T) => v is N;
+
+/**
  * Function type for transforming a value of type T.
  *
  * @template T The type of the value to transform.
