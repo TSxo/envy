@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.4.1
+
+### Patch Changes
+
+-   eea8e34: Update Vitest
+
 ## 0.4.0
 
 ### Minor Changes
