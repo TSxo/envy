@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.5.1
+
+### Patch Changes
+
+- 5f748ca: Optimize allocations, update tests"
+
 ## 0.5.0
 
 ### Minor Changes
