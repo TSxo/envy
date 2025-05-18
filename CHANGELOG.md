@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.5.0
+
+### Minor Changes
+
+- 1807348: Optimize allocations, bump dev deps
+
 ## 0.4.1
 
 ### Patch Changes
