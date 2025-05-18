@@ -90,8 +90,9 @@ suite("Core", function () {
             expect(value).toBe("default");
 
             process.env.OPTIONAL = "";
-            value = optional("OPTIONAL", "default").build();
-            expect(value).toBe("default");
+            expect(() => optional("OPTIONAL", "").build()).to.throw(
+                AssertError,
+            );
 
             process.env.OPTIONAL = undefined;
             value = optional("OPTIONAL", "default").build();
