@@ -11,17 +11,17 @@ Javascript and TypeScript applications.
 
 ## Features
 
--   **Type Safety** - Full TypeScript support with comprehensive type definitions.
--   **Value Transformation** - Transform and normalize values with ease.
--   **Validation** - Rich set of built-in assertions for common use cases.
--   **Type Conversion** - Convert strings to numbers, booleans, arrays, and more.
--   **Type Narrowing** - Narrow types for more precise type safety.
--   **Method Chaining** - Fluent API for building configurations.
--   **Error Handling** - Detailed error messages for missing or invalid values.
--   **Dotenv Compatible** - Fully compatible with [Dotenv](https://github.com/motdotla/dotenv).
--   **ESM and CJS** - Seamlessly supports both ECMAScript Modules (ESM) and CommonJS (CJS) for flexibility across modern and legacy projects.
--   **Tree-Shaking Ready** - Designed with tree-shaking in mind to optimize application size.
--   **Enhanced Dev Experience** - Ships with TypeScript source for easier debugging during development.
+- **Type Safety** - Full TypeScript support with comprehensive type definitions.
+- **Value Transformation** - Transform and normalize values with ease.
+- **Validation** - Rich set of built-in assertions for common use cases.
+- **Type Conversion** - Convert strings to numbers, booleans, arrays, and more.
+- **Type Narrowing** - Narrow types for more precise type safety.
+- **Method Chaining** - Fluent API for building configurations.
+- **Error Handling** - Detailed error messages for missing or invalid values.
+- **Dotenv Compatible** - Fully compatible with [Dotenv](https://github.com/motdotla/dotenv).
+- **ESM and CJS** - Seamlessly supports both ECMAScript Modules (ESM) and CommonJS (CJS) for flexibility across modern and legacy projects.
+- **Tree-Shaking Ready** - Designed with tree-shaking in mind to optimize application size.
+- **Enhanced Dev Experience** - Ships with TypeScript source for easier debugging during development.
 
 ## Installation
 
@@ -93,10 +93,10 @@ const region = envy
 
 Envy supports several built-in types:
 
--   **Strings** - Default type for all environment variables
--   **Numbers** - Using `strConv.toNumber` or `envy.number`
--   **Booleans** - Using `strConv.toBool` or `envy.bool`
--   **Arrays** - Using `strConv.toArray` or `envy.array`
+- **Strings** - Default type for all environment variables
+- **Numbers** - Using `strConv.toNumber` or `envy.number`
+- **Booleans** - Using `strConv.toBool` or `envy.bool`
+- **Arrays** - Using `strConv.toArray` or `envy.array`
 
 ### Type System
 
@@ -278,19 +278,19 @@ const databaseUrl = envy
 
 The library uses three specific error types:
 
--   **MissingError**
+- **MissingError**
 
-    -   Thrown when a required environment variable is not found
-    -   Contains the missing variable key and a descriptive message
+    - Thrown when a required environment variable is not found
+    - Contains the missing variable key and a descriptive message
 
--   **AssertError**
+- **AssertError**
 
-    -   Thrown when a validation check fails
-    -   Includes the failed value, assertion description, and any custom context
+    - Thrown when a validation check fails
+    - Includes the failed value, assertion description, and any custom context
 
--   **ConversionError**
-    -   Thrown when type conversion fails (e.g., converting "abc" to a number)
-    -   Contains the original value, target type, and reason for failure
+- **ConversionError**
+    - Thrown when type conversion fails (e.g., converting "abc" to a number)
+    - Contains the original value, target type, and reason for failure
 
 ## Best Practices
 
