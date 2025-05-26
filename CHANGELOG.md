@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.6.0
+
+### Minor Changes
+
+- d52e52d: Add support for prefix builders
+
 ## 0.5.1
 
 ### Patch Changes
