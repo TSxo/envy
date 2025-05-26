@@ -3,6 +3,7 @@
 A powerful, simple, and type-safe environment variable management library for
 Javascript and TypeScript applications.
 
+[![CI](https://github.com/TSxo/envy/actions/workflows/ci.yaml/badge.svg)](https://github.com/TSxo/envy/actions/workflows/ci.yaml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue)](https://www.typescriptlang.org/)
 ![npm](https://img.shields.io/npm/v/@tsxo/envy)
@@ -16,6 +17,7 @@ Javascript and TypeScript applications.
 - **Validation** - Rich set of built-in assertions for common use cases.
 - **Type Conversion** - Convert strings to numbers, booleans, arrays, and more.
 - **Type Narrowing** - Narrow types for more precise type safety.
+- **Prefixed Variables** - Group and namespace environment variables with automatic prefixing.
 - **Method Chaining** - Fluent API for building configurations.
 - **Error Handling** - Detailed error messages for missing or invalid values.
 - **Dotenv Compatible** - Fully compatible with [Dotenv](https://github.com/motdotla/dotenv).
@@ -272,6 +274,30 @@ const databaseUrl = envy
         "Database URL must include credentials and database name",
     )
     .build();
+```
+
+### Prefixed Environment Variables
+
+Envy supports automatic prefixing for better organization and namespacing of
+environment variables. This is especially useful for complex applications or
+microservices where you want to group related configuration.
+
+```typescript
+import { envy, assert } from "@tsxo/envy";
+
+// Create a prefixed builder.
+const app = envy.withPrefix("APP");
+
+// All variables will be prefixed with "APP_".
+const port = app.number("PORT", 3000).assert(assert.isPort()).build(); // Reads APP_PORT
+const debug = app.bool("DEBUG", false).build(); // Reads APP_DEBUG
+const region = app.optional("AWS_REGION", "us-east-1").build(); // Reads APP_AWS_REGION
+
+// Nested prefixes for hierarchical organization.
+const db = app.withPrefix("DB");
+const dbHost = db.required("HOST").build(); // Reads APP_DB_HOST
+const dbPort = db.number("PORT", 5432).build(); // Reads APP_DB_PORT
+const dbName = db.required("NAME").build(); // Reads APP_DB_NAME
 ```
 
 ## Error Types

@@ -339,6 +339,186 @@ export function array(key: string, defaultValue?: string[]): Envy<string[]> {
 }
 
 /**
+ * Creates a prefixed environment variable builder.
+ *
+ * @param {string} prefix - The prefix to add to all environment variable keys.
+ *
+ * @returns An object with all standard Envy functions that automatically prefix
+ * keys.
+ *
+ * @example
+ * ```typescript
+ * import { envy, assert, strConv } from "@tsxo/envy";
+ *
+ * const app = envy.withPrefix("APP_");
+ *
+ * const port = app.required("PORT")  // Reads from APP_PORT
+ *   .convert(strConv.toNumber)
+ *   .assert(assert.isPort())
+ *   .build();
+ *
+ * const debug = app.bool("DEBUG", false).build(); // Reads from APP_DEBUG
+ * ```
+ */
+export function withPrefix(prefix: string) {
+    const normalizedPrefix = prefix.endsWith("_") ? prefix : `${prefix}_`;
+
+    return {
+        /**
+         * Creates a required environment variable configuration with the provided
+         * prefix.
+         *
+         * Will automatically trim the string value.
+         *
+         * @param {string} key - The environment variable key.
+         *
+         * @returns {Envy<string>} A new Envy instance.
+         *
+         * @throws {MissingError} If no value is available.
+         * @throws {AssertError} If the value is an empty string.
+         *
+         * @example
+         * ```typescript
+         * import { envy, assert, strConv } from "@tsxo/envy";
+         *
+         * const app = envy.withPrefix("APP_");
+         *
+         * const port = app.required("PORT")  // Reads from APP_PORT
+         *   .convert(strConv.toNumber)
+         *   .assert(assert.isPort())
+         *   .build();
+         * ```
+         */
+        required(key: string): Envy<string> {
+            return required(`${normalizedPrefix}${key}`);
+        },
+
+        /**
+         * Creates an optional environment variable configuration with the provided
+         * prefix.
+         *
+         * @param {string} key - The environment variable key.
+         * @param {string} defaultValue - Required default value.
+         *
+         * @returns {Envy<string>} A new Envy instance.
+         *
+         * @throws {MissingError} If no value is available and no default value was provided.
+         * @throws {AssertError} If the value is an empty string.
+         *
+         * @example
+         * ```typescript
+         * import { envy, assert } from "@tsxo/envy";
+         *
+         * const app = envy.withPrefix("APP_");
+         *
+         * const region = app.optional("AWS_REGION", "us-east-1") // Reads from APP_AWS_REGION
+         *   .assert(assert.minLen(1))
+         *   .assert(assert.prefix("us-"))
+         *   .build();
+         * ```
+         */
+        optional(key: string, defaultValue: string): Envy<string> {
+            return optional(`${normalizedPrefix}${key}`, defaultValue);
+        },
+
+        /**
+         * Creates a number-typed environment variable configuration with the
+         * provided prefix.
+         *
+         * @param {string} key - The environment variable key.
+         * @param {number} [defaultValue] - Optional default value.
+         *
+         * @returns {Envy<number>} A new Envy instance.
+         *
+         * @throws {MissingError} If no value is available and no default value was provided.
+         * @throws {ConversionError} If the conversion to a number fails.
+         *
+         * @example
+         * ```typescript
+         * import { envy, assert, strConv } from "@tsxo/envy";
+         *
+         * const app = envy.withPrefix("APP_");
+         *
+         * const port = app.required("PORT")  // Reads from APP_PORT
+         *   .convert(strConv.toNumber)
+         *   .assert(assert.isPort())
+         *   .build();
+         * ```
+         */
+        number(key: string, defaultValue?: number): Envy<number> {
+            return number(`${normalizedPrefix}${key}`, defaultValue);
+        },
+
+        /**
+         * Creates a boolean-typed environment variable configuration with the
+         * provided prefix.
+         *
+         * @param {string} key - The environment variable key.
+         * @param {boolean} [defaultValue] - Optional default value.
+         *
+         * @returns {Envy<boolean>} A new Envy instance.
+         *
+         * @throws {MissingError} If no value is available and no default value was provided.
+         * @throws {ConversionError} If the conversion to a boolean fails.
+         *
+         * @example
+         * ```typescript
+         * import { envy } from "@tsxo/envy";
+         *
+         * const app = envy.withPrefix("APP_");
+         *
+         * const debug = app.bool("DEBUG", false).build(); // Reads from APP_DEBUG
+         * ```
+         */
+        bool(key: string, defaultValue?: boolean): Envy<boolean> {
+            return bool(`${normalizedPrefix}${key}`, defaultValue);
+        },
+
+        /**
+         * Creates a string array environment variable configuration with the
+         * provided prefix.
+         *
+         * @param {string} key - The environment variable key to read from `process.env`.
+         * @param {string[]} [defaultValue] - Optional default value.
+         *
+         * @returns {Envy<string[]>} A new Envy instance.
+         *
+         * @throws {MissingError} If no value is available and no default value was provided.
+         * @throws {ConversionError} If the conversion to an array fails.
+         *
+         * @example
+         * ```typescript
+         * import { envy } from "@tsxo/envy";
+         *
+         * const app = envy.withPrefix("APP_");
+         *
+         * const debug = app.array("CORS", ["*"]).build(); // Reads from APP_CORS
+         * ```
+         */
+        array(key: string, defaultValue?: string[]): Envy<string[]> {
+            return array(`${normalizedPrefix}${key}`, defaultValue);
+        },
+
+        /**
+         * Creates a nested prefix builder (for hierarchical prefixes).
+         *
+         * @example
+         * ```typescript
+         * import { envy } from "@tsxo/envy";
+         *
+         * const app = envy.withPrefix("APP_");
+         * const db = app.withPrefix("DB_"); // Results in APP_DB_ prefix
+         *
+         * const host = db.required("HOST").build(); // Reads from APP_DB_HOST
+         * ```
+         */
+        withPrefix(nestedPrefix: string) {
+            return withPrefix(`${normalizedPrefix}${nestedPrefix}`);
+        },
+    };
+}
+
+/**
  * Creates a new Envy instance with a default value, or throws a `MissingError`
  * if no default value was provided.
  *
