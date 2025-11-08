@@ -30,7 +30,6 @@ suite("Assert :: Array Like", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = len(t.test);
                 const desc = t.expected ? "is of" : "is not of";
@@ -68,7 +67,6 @@ suite("Assert :: Array Like", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = minLen(t.test);
                 const desc = t.expected
@@ -104,7 +102,6 @@ suite("Assert :: Array Like", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = maxLen(t.test);
                 const desc = t.expected ? "is within" : "exceeds";

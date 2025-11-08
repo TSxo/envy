@@ -101,7 +101,7 @@ export function toNumber(s: string): number {
     }
 
     const num = +s;
-    if (isNaN(num)) {
+    if (Number.isNaN(num)) {
         throw new ConversionError(s, {
             description: `Value "${s}" is not a number.`,
             sourceType: "string",

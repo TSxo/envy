@@ -27,7 +27,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = prefix(t.test);
                 const desc = t.expected ? "has" : "does not have";
@@ -63,7 +62,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = suffix(t.test);
                 const desc = t.expected ? "has" : "does not have";
@@ -100,7 +98,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = substring(t.test);
                 const desc = t.expected ? "contains" : "does not contain";
@@ -128,12 +125,11 @@ suite("Assert :: String", function () {
                 { val: "", test: /^$/, expected: true }, // empty string
                 { val: "TEST", test: /test/i, expected: true }, // case insensitive
                 { val: "test\ntest", test: /test$/m, expected: true }, // multiline
-                { val: "test", test: new RegExp("test"), expected: true }, // RegExp object
+                { val: "test", test: /test/, expected: true }, // RegExp object
             ];
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const asserter = matches(t.test);
                 const desc = t.expected ? "matches" : "does not match";
@@ -167,7 +163,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -190,7 +185,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -211,7 +205,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -234,7 +227,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -258,7 +250,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -280,7 +271,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -301,7 +291,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {
@@ -324,7 +313,6 @@ suite("Assert :: String", function () {
 
             for (let i = 0; i < table.length; i++) {
                 const t = table[i];
-                if (t == undefined) break;
 
                 const desc = t.expected ? "Should accept" : "Should reject";
                 test(`${desc} "${t.val}"`, function () {

@@ -33,7 +33,7 @@ suite("Core", function () {
             expect(() =>
                 required("NUM")
                     .convert(Number)
-                    .assert(n => n == 1, "Must be one")
+                    .assert(n => n === 1, "Must be one")
                     .build(),
             ).toThrow(AssertError);
         });
@@ -151,7 +151,7 @@ suite("Core", function () {
             expect(defaultValue).toStrictEqual(["*"]);
 
             process.env.CORS = "     one,     two, three";
-            let value = array("CORS").build();
+            const value = array("CORS").build();
             expect(value).toStrictEqual(["one", "two", "three"]);
 
             process.env.CORS = undefined;

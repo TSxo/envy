@@ -10,11 +10,15 @@ suite("String Convert", function () {
         const empty = "";
 
         test("Should convert truthy values to true", function () {
-            truthy.forEach(val => expect(toBool(val)).to.be.true);
+            truthy.forEach(val => {
+                expect(toBool(val)).to.be.true;
+            });
         });
 
         test("Should convert falsy values to false", function () {
-            falsy.forEach(val => expect(toBool(val)).to.be.false);
+            falsy.forEach(val => {
+                expect(toBool(val)).to.be.false;
+            });
         });
 
         test("Should throw ConversionError for invalid value", function () {
@@ -43,6 +47,7 @@ suite("String Convert", function () {
         }
 
         test("Should throw a conversion error when unable to parse", function () {
+            // biome-ignore lint/suspicious: Needed to test edge case.
             expect(() => toArray(1 as any, ",")).to.throw(ConversionError);
         });
     });

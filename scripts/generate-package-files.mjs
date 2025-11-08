@@ -1,6 +1,6 @@
 // scripts/generate-package-files.js
-import { writeFileSync, existsSync } from "fs";
-import { join } from "path";
+import { writeFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
 
 function generatePackageFiles() {
     const esmDir = "dist/esm";
