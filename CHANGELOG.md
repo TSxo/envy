@@ -1,5 +1,11 @@
 # @tsxo/envy
 
+## 0.6.1
+
+### Patch Changes
+
+- 2e814ea: Update glob dep
+
 ## 0.6.0
 
 ### Minor Changes

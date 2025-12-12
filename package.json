@@ -1,6 +1,6 @@
 {
     "name": "@tsxo/envy",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "author": "TSxo",
     "license": "MIT",
     "description": "A lightweight, zero dependancy, and typesafe way to retrieve environment variables.",
